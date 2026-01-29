@@ -41,6 +41,24 @@ export const DingTalkConfigSchema = z.object({
   /** Enable debug logging */
   debug: z.boolean().optional().default(false),
 
+  /** Message type for replies: text, markdown, or card */
+  messageType: z.enum(['text', 'markdown', 'card']).optional().default('markdown'),
+
+  /** Card template ID for interactive cards (e.g., 'StandardCard') */
+  cardTemplateId: z.string().optional().default('StandardCard'),
+
+  /** API endpoint for sending interactive cards */
+  cardSendApiUrl: z
+    .string()
+    .optional()
+    .default('https://api.dingtalk.com/v1.0/im/v1.0/robot/interactiveCards/send'),
+
+  /** API endpoint for updating interactive cards */
+  cardUpdateApiUrl: z
+    .string()
+    .optional()
+    .default('https://api.dingtalk.com/v1.0/im/robots/interactiveCards'),
+
   /** Multi-account configuration */
   accounts: z.record(z.string(), z.unknown()).optional(),
 });
